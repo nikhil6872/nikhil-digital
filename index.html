@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikhil Digital Seva | Online Form & Student Paperwork</title>
+  <meta name="description" content="Ghar baithe bharwayein Sarkari Naukri (SSO, RSSB, RPSC, SSC, Railway), Entrance, College aur Scholarship forms. Free Photo/Sign KB Resizer & PDF Maker." />
+
+  <!-- WhatsApp / Social Media Rich Preview Tags -->
+  <meta property="og:title" content="Nikhil Digital Seva — Ghar Baithe Online Form Bharwayein" />
+  <meta property="og:description" content="Sarkari Naukri, Entrance, College & Scholarship Forms (₹70–₹150). Final submit se pehle Preview PDF + Free KB Resizer & PDF Maker!" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    /* ===== THEME VARIABLES (LIGHT & DARK) ===== */
+    :root {
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #f1f5f9;
+      --bg-nav: rgba(255, 255, 255, 0.9);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-soft: rgba(37, 99, 235, 0.1);
+      --whatsapp: #16a34a;
+      --whatsapp-hover: #15803d;
+      --badge-bg: #dbeafe;
+      --badge-text: #1e40af;
+      --success-bg: rgba(22, 163, 74, 0.12);
+      --success-text: #15803d;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 25px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #090d16;
+      --bg-surface: #111827;
+      --bg-surface-alt: #1e293b;
+      --bg-nav: rgba(17, 24, 39, 0.9);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --primary-soft: rgba(59, 130, 246, 0.16);
+      --whatsapp: #22c55e;
+      --whatsapp-hover: #16a34a;
+      --badge-bg: rgba(59, 130, 246, 0.2);
+      --badge-text: #93c5fd;
+      --success-bg: rgba(34, 197, 94, 0.16);
+      --success-text: #4ade80;
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-nav);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.12rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), #06b6d4);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 56px 0 40px;
+      text-align: center;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.95rem);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 830px;
+      margin: 0 auto 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span { color: var(--primary); }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.03rem;
+      max-width: 650px;
+      margin: 0 auto 26px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #ffffff;
+    }
+
+    .btn-whatsapp:hover { background: var(--whatsapp-hover); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 30px;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 44px 0; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ===== LIVE FORMS ===== */
+    .live-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .live-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .status-tag {
+      display: inline-block;
+      background: var(--success-bg);
+      color: var(--success-text);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .live-card h3 { font-size: 1.06rem; margin-bottom: 4px; }
+    .live-card p { font-size: 0.86rem; color: var(--text-secondary); }
+
+    /* ===== SERVICES GRID ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+    }
+
+    .price-tag {
+      background: var(--bg-surface-alt);
+      color: var(--primary);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .card h3 { font-size: 1.18rem; margin-bottom: 12px; }
+
+    .service-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .service-list li {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .service-list li::before {
+      content: "✓";
+      color: var(--whatsapp);
+      font-weight: 800;
+    }
+
+    /* ===== FREE STUDENT TOOLS ===== */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .tool-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .preset-btn {
+      padding: 6px 11px;
+      border-radius: 7px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-alt);
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .preset-btn.active, .preset-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .tool-result {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 9px;
+      background: var(--bg-surface-alt);
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    /* ===== QUICK PORTAL LINKS ===== */
+    .portals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
+
+    .portal-link {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 11px;
+      padding: 14px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .portal-link:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* ===== CHECKLIST ===== */
+    .checklist-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 14px;
+    }
+
+    .tab-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-alt);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .checklist-content ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .checklist-content li {
+      background: var(--bg-surface-alt);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.89rem;
+      font-weight: 500;
+    }
+
+    /* ===== PRIVACY BANNER ===== */
+    .privacy-banner {
+      background: var(--primary-soft);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .privacy-banner h4 { font-size: 1.05rem; margin-bottom: 4px; }
+    .privacy-banner p { font-size: 0.9rem; color: var(--text-secondary); }
+
+    /* ===== STEPS ===== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .step-num {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-align: center;
+      line-height: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* ===== FEE CALCULATOR + ORDER FORM ===== */
+    .order-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-group { margin-bottom: 14px; }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.88rem;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-alt);
+      color: var(--text-primary);
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .highlight-input {
+      box-shadow: 0 0 0 3px var(--primary-soft);
+      border-color: var(--primary) !important;
+    }
+
+    .fee-summary {
+      background: var(--bg-surface-alt);
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+    }
+
+    .fee-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+
+    .fee-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-color);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .btn-group-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* ===== REVIEWS & FAQ ===== */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .review-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 11px;
+      padding: 15px 18px;
+    }
+
+    summary {
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    details p {
+      margin-top: 10px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* ===== FLOATING WHATSAPP & FOOTER ===== */
+    .float-wa {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      background: var(--whatsapp);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .float-wa:hover { background: var(--whatsapp-hover); }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 32px 0 76px;
+      margin-top: 36px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 780px) {
+      .nav-links { display: none; }
+      .btn-group-dual { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">N</div>
+        <span>Nikhil Digital Seva</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#live-forms" data-hinglish="Live Forms" data-hi="लाइव फॉर्म्स">Live Forms</a>
+        <a href="#services" data-hinglish="Rates" data-hi="फीस और सेवाएं">Rates</a>
+        <a href="#tools" data-hinglish="Free Tools" data-hi="फ्री टूल्स">Free Tools</a>
+        <a href="#documents" data-hinglish="Documents" data-hi="दस्तावेज़">Documents</a>
+        <a href="#apply" data-hinglish="Order Form" data-hi="फॉर्म भरवाएं">Order Form</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="pill-btn" id="langToggle" aria-label="Switch Language">
+          🌐 <span id="langLabel">हिन्दी</span>
+        </button>
+        <button class="pill-btn" id="themeToggle" aria-label="Toggle Dark or Light Mode">
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="pill-badge" data-hinglish="⚡ 100% Online Service • No Cyber Cafe Line" data-hi="⚡ 100% ऑनलाइन सेवा • साइबर कैफे की लाइन से बचें">
+        ⚡ 100% Online Service • No Cyber Cafe Line
+      </div>
+      <h1 data-hinglish="Ghar Baithe Bharwayein Apne <span>Sarkari Naukri, Entrance & College</span> Forms" data-hi="घर बैठे भरवाएं अपने <span>सरकारी नौकरी, एंट्रेंस और कॉलेज</span> के फॉर्म">
+        Ghar Baithe Bharwayein Apne <span>Sarkari Naukri, Entrance & College</span> Forms
+      </h1>
+      <p data-hinglish="WhatsApp ya Email par documents bhejein, final submit se pehle apna Preview PDF check karein, aur bina kisi galti ke apna form aur official receipt payein." data-hi="व्हाट्सएप या ईमेल पर दस्तावेज़ भेजें, फाइनल सबमिट से पहले अपना प्रीव्यू PDF जांचें, और बिना किसी गलती के आधिकारिक रसीद पाएं।">
+        WhatsApp ya Email par documents bhejein, final submit se pehle apna Preview PDF check karein, aur bina kisi galti ke apna form aur official receipt payein.
+      </p>
+      <div class="hero-buttons">
+        <a href="#apply" class="btn btn-whatsapp" data-hinglish="📲 Abhi Form Bharwayein" data-hi="📲 अभी फॉर्म भरवाएं">📲 Abhi Form Bharwayein</a>
+        <a href="#tools" class="btn btn-outline" data-hinglish="🛠️ Free Photo Resizer & PDF Maker" data-hi="🛠️ फ्री फोटो रिसाइज़र और PDF मेकर">🛠️ Free Photo Resizer & PDF Maker</a>
+        <button class="btn btn-outline" onclick="shareWebsite()" data-hinglish="🔗 Friends Ko Share Karein" data-hi="🔗 दोस्तों को शेयर करें">🔗 Friends Ko Share Karein</button>
+      </div>
+      <div class="trust-strip">
+        <span>✅ Final Submit Se Pehle Preview PDF</span>
+        <span>✅ 48-Hour Data Auto-Delete Privacy</span>
+        <span>✅ Safe & Fast UPI Payment</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE FORMS (1-CLICK APPLY) -->
+  <section id="live-forms">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-hinglish="🔥 Abhi Chal Rahe Forms (1-Click Apply)" data-hi="🔥 अभी चल रहे प्रमुख फॉर्म्स (1-क्लिक अप्लाई)">🔥 Abhi Chal Rahe Forms (1-Click Apply)</h2>
+        <p data-hinglish="Kisi bhi form par click karein — neeche order form automatic bhar jayega" data-hi="किसी भी फॉर्म पर क्लिक करें — नीचे ऑर्डर फॉर्म अपने आप भर जाएगा">Kisi bhi form par click karein — neeche order form automatic bhar jayega</p>
+      </div>
+
+      <div class="live-grid">
+        <div class="live-card">
+          <div>
+            <span class="status-tag">● Active • Always Open</span>
+            <h3>Rajasthan SSO ID & OTR Registration</h3>
+            <p>Sabhi Rajasthan bhartiyon ke liye One Time Registration aur Aadhaar/Jan Aadhaar verify.</p>
+          </div>
+          <button class="btn btn-outline" onclick="applyLiveForm('Sarkari Naukri / Exam Form', 'Rajasthan SSO ID & OTR Registration')">Apply Now →</button>
+        </div>
+
+        <div class="live-card">
+          <div>
+            <span class="status-tag">● Active • Rajasthan Exams</span>
+            <h3>RSSB / RPSC CET, Police & Patwari</h3>
+            <p>SSO portal ke zariye sabhi Rajasthan state level recruitment forms bina galti ke.</p>
+          </div>
+          <button class="btn btn-outline" onclick="applyLiveForm('Sarkari Naukri / Exam Form', 'RSSB / RPSC Recruitment Form')">Apply Now →</button>
+        </div>
+
+        <div class="live-card">
+          <div>
+            <span class="status-tag">● Active • Central Govt</span>
+            <h3>SSC (GD, CHSL, CGL, MTS) & Railway</h3>
+            <p>Live photo capture guidance aur exact signature KB formatting ke saath form filling.</p>
+          </div>
+          <button class="btn btn-outline" onclick="applyLiveForm('Sarkari Naukri / Exam Form', 'SSC / Railway Exam Form')">Apply Now →</button>
+        </div>
+
+        <div class="live-card">
+          <div>
+            <span class="status-tag">● Active • Student Aid</span>
+            <h3>Samaj Kalyan (SJMS) & NSP Scholarship</h3>
+            <p>Post-Matric scholarship renewal aur fresh online application with document merge.</p>
+          </div>
+          <button class="btn btn-outline" onclick="applyLiveForm('Scholarship Form (SJMS / NSP)', 'Samaj Kalyan / NSP Scholarship Form')">Apply Now →</button>
+        </div>
+
+        <div class="live-card">
+          <div>
+            <span class="status-tag">● Active • University</span>
+            <h3>RRBMU Alwar / College Exam & Degree</h3>
+            <p>Semester/Annual exam forms, ABC ID, online degree, marksheet aur migration apply.</p>
+          </div>
+          <button class="btn btn-outline" onclick="applyLiveForm('College Admission / Semester Form', 'College Exam / Online Degree Form')">Apply Now →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES & RATES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-hinglish="Hamari Services & Transparent Charges" data-hi="हमारी सेवाएं और पारदर्शी शुल्क">Hamari Services & Transparent Charges</h2>
+        <p data-hinglish="Sirf Exam, Entrance, College aur Scholarship Paperwork par focused service" data-hi="सिर्फ परीक्षा, एंट्रेंस, कॉलेज और स्कॉलरशिप पेपरवर्क पर केंद्रित सेवा">Sirf Exam, Entrance, College aur Scholarship Paperwork par focused service</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon">🎯</div>
+            <span class="price-tag">₹70 – ₹150 + Govt Fee</span>
+          </div>
+          <h3>Sarkari Naukri & Entrance Forms</h3>
+          <ul class="service-list">
+            <li>Rajasthan SSO ID & One Time Registration (OTR)</li>
+            <li>RSSB, RPSC, Rajasthan Police, Patwari & CET Forms</li>
+            <li>SSC (CGL, CHSL, GD, MTS) & Railway (RRB) Forms</li>
+            <li>Army / Agniveer, Airforce & Bank Exam Forms</li>
+            <li>CUET, JEE, NEET, B.Ed & BSTC Entrance Forms</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon">🎓</div>
+            <span class="price-tag">₹70 – ₹150 + Govt Fee</span>
+          </div>
+          <h3>College & Scholarship Paperwork</h3>
+          <ul class="service-list">
+            <li>College Admission & Semester / Annual Exam Forms</li>
+            <li>Samaj Kalyan (SJMS) & NSP Scholarship Forms</li>
+            <li>Online Degree, Provisional & Migration Certificate Apply</li>
+            <li>Revaluation / Rechecking & Admit Card Download</li>
+            <li>Photo/Signature Resize (20KB–50KB) & PDF Merge</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE STUDENT TOOLS -->
+  <section id="tools">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-hinglish="🛠️ Free Student Utilities (100% Browser-Based)" data-hi="🛠️ फ्री स्टूडेंट टूल्स (मोबाइल और पीसी के लिए)">🛠️ Free Student Utilities (100% Browser-Based)</h2>
+        <p data-hinglish="Aapki files kahin upload nahi hoti — seedha aapke device par convert hoti hain" data-hi="आपकी फाइलें कहीं अपलोड नहीं होतीं — सीधे आपके फोन/कंप्यूटर में ही बनती हैं">Aapki files kahin upload nahi hoti — seedha aapke device par convert hoti hain</p>
+      </div>
+
+      <div class="tools-grid">
+        <!-- Tool 1: KB Resizer -->
+        <div class="tool-box">
+          <h3 style="margin-bottom: 6px;">📸 Photo & Signature KB Resizer</h3>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 12px;">
+            Sarkari forms ke liye photo ko 50KB ya signature ko 20KB ke andar set karein.
+          </p>
+
+          <div class="form-group">
+            <input type="file" id="resizeInput" accept="image/*" />
+          </div>
+
+          <div class="preset-row">
+            <button type="button" class="preset-btn active" onclick="setTargetKB(50, this)">Photo (50 KB)</button>
+            <button type="button" class="preset-btn" onclick="setTargetKB(20, this)">Signature (20 KB)</button>
+            <button type="button" class="preset-btn" onclick="setTargetKB(200, this)">Document (200 KB)</button>
+          </div>
+
+          <div class="form-group">
+            <label for="targetKbInput">Target Max Size (KB):</label>
+            <input type="number" id="targetKbInput" value="50" min="5" max="2000" />
+          </div>
+
+          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="compressImage()">
+            ⚡ Resize & Compress Image
+          </button>
+
+          <div class="tool-result" id="resizeResult"></div>
+        </div>
+
+        <!-- Tool 2: Images to Single PDF -->
+        <div class="tool-box">
+          <h3 style="margin-bottom: 6px;">📑 Images to Single PDF Maker</h3>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 12px;">
+            10th, 12th marksheet, Aadhaar aur certificates ki multiple photos ko ek A4 PDF mein jodein.
+          </p>
+
+          <div class="form-group">
+            <label for="pdfImagesInput">Multiple Photos Chunein (JPG/PNG):</label>
+            <input type="file" id="pdfImagesInput" accept="image/*" multiple />
+          </div>
+
+          <div class="form-group">
+            <label for="pdfFileName">PDF File ka Naam:</label>
+            <input type="text" id="pdfFileName" value="student-documents" placeholder="Jaise: marksheets-merged" />
+          </div>
+
+          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="createMergedPDF()">
+            📥 Create & Download Single PDF
+          </button>
+
+          <div class="tool-result" id="pdfResult"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFICIAL PORTALS QUICK LINKS -->
+  <section id="portals">
+    <div class="container">
+      <div class="section-header">
+        <h2>🔗 Student Official Portals Quick-Links</h2>
+        <p>Admit Card, Result aur Status check karne ke liye direct government portals</p>
+      </div>
+      <div class="portals-grid">
+        <a href="https://sso.rajasthan.gov.in" target="_blank" rel="noopener" class="portal-link">Rajasthan SSO <span>↗</span></a>
+        <a href="https://rssb.rajasthan.gov.in" target="_blank" rel="noopener" class="portal-link">RSSB Board <span>↗</span></a>
+        <a href="https://rpsc.rajasthan.gov.in" target="_blank" rel="noopener" class="portal-link">RPSC Portal <span>↗</span></a>
+        <a href="https://ssc.gov.in" target="_blank" rel="noopener" class="portal-link">SSC Official <span>↗</span></a>
+        <a href="https://www.rrbmuniv.ac.in" target="_blank" rel="noopener" class="portal-link">RRBMU Alwar <span>↗</span></a>
+        <a href="https://scholarships.gov.in" target="_blank" rel="noopener" class="portal-link">NSP Scholarship <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENT CHECKLIST -->
+  <section id="documents">
+    <div class="container">
+      <div class="section-header">
+        <h2>📄 Zaroori Documents Checklist</h2>
+        <p>Category chunein aur dekhein WhatsApp par kya-kya bhejna hoga</p>
+      </div>
+
+      <div class="checklist-box">
+        <div class="tabs">
+          <button class="tab-btn active" onclick="showChecklist('otr', this)">SSO ID & OTR</button>
+          <button class="tab-btn" onclick="showChecklist('exam', this)">Sarkari Exam Form</button>
+          <button class="tab-btn" onclick="showChecklist('scholarship', this)">Scholarship Form</button>
+          <button class="tab-btn" onclick="showChecklist('college', this)">College & Degree</button>
+        </div>
+
+        <div class="checklist-content" id="checklistDisplay"></div>
+
+        <button class="btn btn-outline" onclick="copyChecklist()" id="copyBtn" style="padding: 9px 16px; font-size: 0.86rem;">
+          📋 Copy Checklist Text
+        </button>
+
+        <div class="privacy-banner">
+          <div style="font-size: 1.8rem;">🔒</div>
+          <div>
+            <h4>100% Data Privacy & Zero-Error Guarantee</h4>
+            <p>Final receipt deliver hone ke <strong>48 ghante baad</strong> aapke Aadhaar, Marksheet aur sabhi personal documents system se delete kar diye jaate hain, aur bina aapke Preview OK ke kabhi final submit nahi hota.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="process">
+    <div class="container">
+      <div class="section-header">
+        <h2>4-Step Safe & Error-Free Process</h2>
+        <p>Jab tak aap details confirm nahi karte, tab tak form final submit nahi hota</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <h4>Documents Bhejein</h4>
+          <p>WhatsApp (+91 7597264028) ya Email par apne documents ki saaf photo/PDF bhejein.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <h4>Preview PDF Check Karein</h4>
+          <p>Form bharne ke baad Preview PDF bheja jayega — Naam, DOB aur Category check karein.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <h4>UPI Se Payment Karein</h4>
+          <p>Sab details sahi hone par OK likhein aur Govt Fee + Service Charge UPI karein.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">4</span>
+          <h4>Final Receipt Payein</h4>
+          <p>Turant form final submit karke aapko Official Acknowledgement PDF bhej di jayegi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEE ESTIMATOR + DIRECT ORDER FORM -->
+  <section id="apply">
+    <div class="container">
+      <div class="section-header">
+        <h2>🧮 Fee Estimator & Direct Order Form</h2>
+        <p>Apna approx kharcha check karein aur seedha WhatsApp ya Email par order bhejein</p>
+      </div>
+
+      <div class="order-layout">
+        <!-- Fee Estimator -->
+        <div class="panel-box">
+          <h3 style="margin-bottom: 14px;">Approx Fee & Charge Calculator</h3>
+
+          <div class="form-group">
+            <label for="calcFormType">Form Type Chunein:</label>
+            <select id="calcFormType" onchange="calculateFee()">
+              <option value="otr">Rajasthan SSO OTR (One Time Registration)</option>
+              <option value="ssc">SSC / Railway Exam Form</option>
+              <option value="state">RSSB / RPSC Recruitment Form</option>
+              <option value="scholarship">Samaj Kalyan / NSP Scholarship Form</option>
+              <option value="college">College Exam / Degree / Migration Form</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="calcCategory">Category Chunein:</label>
+            <select id="calcCategory" onchange="calculateFee()">
+              <option value="gen">General / OBC (Creamy Layer)</option>
+              <option value="reserved">OBC (NCL) / EWS / SC / ST / Female</option>
+            </select>
+          </div>
+
+          <div class="fee-summary" id="feeOutput"></div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px;">
+            *Note: Exact Govt Fee notification par nirbhar karti hai. Preview PDF ke waqt exact amount bata diya jayega.
+          </p>
+        </div>
+
+        <!-- Order Form -->
+        <div class="panel-box">
+          <h3 style="margin-bottom: 14px;">Abhi Form Request Bhejein</h3>
+          <form id="orderForm" onsubmit="sendToWhatsApp(event)">
+            <div class="form-group">
+              <label for="studentName">Aapka Poora Naam *</label>
+              <input type="text" id="studentName" placeholder="Jaise: Rahul Sharma" required />
+            </div>
+
+            <div class="form-group">
+              <label for="serviceCategory">Service Category *</label>
+              <select id="serviceCategory" required>
+                <option value="Sarkari Naukri / Exam Form">Sarkari Naukri / Exam Form (SSO, SSC, Railway, Police)</option>
+                <option value="Entrance Exam Form">Entrance Exam Form (CUET, JEE, NEET, B.Ed/BSTC)</option>
+                <option value="College Admission / Semester Form">College Admission / Semester Exam Form</option>
+                <option value="Scholarship Form (SJMS / NSP)">Scholarship Form (Samaj Kalyan / NSP)</option>
+                <option value="Online Degree / Migration / Document Work">Online Degree / Migration / PDF Resize</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="formDetails">Kaunsa Form Bharwana Hai? *</label>
+              <input type="text" id="formDetails" placeholder="Jaise: Rajasthan CET / SSC GD / BCA Sem Form" required />
+            </div>
+
+            <div class="form-group">
+              <label for="extraNote">Koi Extra Jankari (Optional)</label>
+              <textarea id="extraNote" rows="2" placeholder="Exam center preference ya koi sawal..."></textarea>
+            </div>
+
+            <div class="btn-group-dual">
+              <button type="submit" class="btn btn-whatsapp">📲 WhatsApp Par Bhejein</button>
+              <button type="button" class="btn btn-outline" onclick="sendToEmail()">✉️ Email Par Bhejein</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS & FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2>⭐ Students Feedback & Aksar Puche Jane Wale Sawal</h2>
+        <p>Alwar aur poore Rajasthan ke students ka bharosa</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">"Mera SSO OTR aur CET form ghar baithe 15 minute mein bhar gaya. Submit se pehle Preview PDF bhej kar har spelling check karwayi."</p>
+          <strong>— Rohit Meena, Alwar</strong>
+        </div>
+        <div class="review-card">
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">"Samaj Kalyan scholarship ke liye saare documents ek PDF mein merge karke form apply kar diya, cyber cafe ke chakkar bach gaye."</p>
+          <strong>— Pooja Yadav, Behror</strong>
+        </div>
+        <div class="review-card">
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">"SSC GD ke liye photo aur sign ka exact KB size set karke bina kisi galti ke receipt WhatsApp par mil gayi."</p>
+          <strong>— Deepak Saini, Jaipur</strong>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>Payment kab aur kaise karni hogi?</summary>
+          <p>Aapko pehle koi advance dene ki zaroorat nahi hai. Form bharne ke baad jab hum aapko WhatsApp par Preview PDF bhejenge aur aap details OK karenge, tabhi aapko UPI ke zariye Govt Fee + Service Charge bhejna hoga.</p>
+        </details>
+        <details>
+          <summary>Kya Alwar ke bahar ke students bhi form bharwa sakte hain?</summary>
+          <p>Haan bilkul! Yeh 100% online service hai. Rajasthan aur poore Bharat ke kisi bhi shehar ya gaon ke students WhatsApp ya Email par documents bhej kar apne forms bharwa sakte hain.</p>
+        </details>
+        <details>
+          <summary>Final receipt kaise aur kitni der mein milegi?</summary>
+          <p>Payment confirm hote hi form final submit kar diya jaata hai aur 5–10 minute ke andar Official Acknowledgement Receipt PDF seedha aapke WhatsApp aur Email par bhej di jaati hai.</p>
+        </details>
+        <details>
+          <summary>Mere Aadhaar aur Marksheet safe rahenge?</summary>
+          <p>Haan, aapki privacy hamari priority hai. Receipt deliver hone ke 48 ghante baad aapke sabhi documents aur photos hamare system se permanently delete kar diye jaate hain.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/917597264028?text=Hello%20Nikhil%20Digital%20Seva!%20Mujhe%20online%20form%20bharwana%20hai." target="_blank" rel="noopener" class="float-wa">
+    💬 WhatsApp Help
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 <strong>Nikhil Digital Seva</strong> — Online Form & Student Paperwork Service (Alwar, Rajasthan)</p>
+      <div class="footer-links">
+        <a href="https://wa.me/917597264028" target="_blank" rel="noopener">📲 WhatsApp: +91 7597264028</a>
+        <a href="mailto:ns7859866@gmail.com">✉️ Email: ns7859866@gmail.com</a>
+        <span>⏰ Timing: 10:00 AM – 9:00 PM</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const WHATSAPP_NUMBER = "917597264028";
+    const EMAIL_ADDRESS = "ns7859866@gmail.com";
+
+    // ===== DARK / LIGHT MODE TOGGLE =====
+    const htmlEl = document.documentElement;
+    const themeToggleBtn = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeLabel = document.getElementById("themeLabel");
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute("data-theme", theme);
+      localStorage.setItem("nds_theme", theme);
+      themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+      themeLabel.textContent = theme === "dark" ? "Light" : "Dark";
+    }
+
+    const savedTheme = localStorage.getItem("nds_theme");
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      applyTheme("dark");
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+      const current = htmlEl.getAttribute("data-theme");
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+
+    // ===== HINDI / HINGLISH LANGUAGE TOGGLE =====
+    let currentLang = localStorage.getItem("nds_lang") || "hinglish";
+    const langToggleBtn = document.getElementById("langToggle");
+    const langLabel = document.getElementById("langLabel");
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("nds_lang", lang);
+      langLabel.textContent = lang === "hi" ? "Hinglish" : "हिन्दी";
+      document.querySelectorAll("[data-hinglish]").forEach(el => {
+        el.innerHTML = lang === "hi" ? el.getAttribute("data-hi") : el.getAttribute("data-hinglish");
+      });
+    }
+
+    if (currentLang === "hi") applyLanguage("hi");
+
+    langToggleBtn.addEventListener("click", () => {
+      applyLanguage(currentLang === "hinglish" ? "hi" : "hinglish");
+    });
+
+    // ===== SHARE WEBSITE ON WHATSAPP =====
+    function shareWebsite() {
+      const pageUrl = window.location.href;
+      const text = `🎓 *Nikhil Digital Seva* — Ghar baithe bharwayein Sarkari Naukri (SSO, RSSB, SSC, Railway), College & Scholarship forms bina cyber cafe jaye!\n\nFree Photo/Sign KB Resizer & PDF Maker bhi available hai:\n${pageUrl}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+    }
+
+    // ===== 1-CLICK LIVE FORM APPLY =====
+    function applyLiveForm(category, formName) {
+      const catSelect = document.getElementById("serviceCategory");
+      const detailsInput = document.getElementById("formDetails");
+      catSelect.value = category;
+      detailsInput.value = formName;
+      detailsInput.classList.add("highlight-input");
+      document.getElementById("apply").scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        detailsInput.focus();
+        detailsInput.classList.remove("highlight-input");
+      }, 900);
+    }
+
+    // ===== TOOL 1: PHOTO & SIGNATURE KB RESIZER =====
+    function setTargetKB(kb, btn) {
+      document.getElementById("targetKbInput").value = kb;
+      document.querySelectorAll(".preset-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    function compressImage() {
+      const fileInput = document.getElementById("resizeInput");
+      const targetKB = parseInt(document.getElementById("targetKbInput").value, 10) || 50;
+      const resultBox = document.getElementById("resizeResult");
+
+      if (!fileInput.files || !fileInput.files[0]) {
+        alert("Pehle koi Photo ya Signature image select karein!");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const origKB = (file.size / 1024).toFixed(1);
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+
+          // Scale down very large camera photos first
+          const maxDim = targetKB <= 30 ? 600 : 1200;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+
+          let quality = 0.92;
+          let dataUrl = canvas.toDataURL("image/jpeg", quality);
+          let sizeKB = Math.round((dataUrl.length * 3) / 4 / 1024);
+
+          while (sizeKB > targetKB && quality > 0.1) {
+            quality -= 0.06;
+            dataUrl = canvas.toDataURL("image/jpeg", quality);
+            sizeKB = Math.round((dataUrl.length * 3) / 4 / 1024);
+          }
+
+          resultBox.style.display = "block";
+          resultBox.innerHTML = `
+            <p style="margin-bottom: 8px;">✅ Original: <strong>${origKB} KB</strong> → New Size: <strong style="color: var(--whatsapp);">${sizeKB} KB</strong></p>
+            <a href="${dataUrl}" download="resized-${targetKB}kb.jpg" class="btn btn-whatsapp" style="padding: 8px 14px; font-size: 0.85rem; width: 100%;">
+              📥 Download Resized Image (${sizeKB} KB)
+            </a>
+          `;
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ===== TOOL 2: IMAGES TO SINGLE PDF MAKER =====
+    async function createMergedPDF() {
+      const input = document.getElementById("pdfImagesInput");
+      const fileNameInput = document.getElementById("pdfFileName").value.trim() || "student-documents";
+      const resultBox = document.getElementById("pdfResult");
+
+      if (!input.files || input.files.length === 0) {
+        alert("Pehle kam se kam 1 image select karein!");
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        const imgData = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.readAsDataURL(file);
+        });
+
+        const img = await new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => resolve(image);
+          image.src = imgData;
+        });
+
+        if (i > 0) pdf.addPage();
+
+        const margin = 10;
+        const maxW = pageWidth - margin * 2;
+        const maxH = pageHeight - margin * 2;
+        const ratio = Math.min(maxW / img.width, maxH / img.height);
+        const w = img.width * ratio;
+        const h = img.height * ratio;
+        const x = (pageWidth - w) / 2;
+        const y = (pageHeight - h) / 2;
+
+        pdf.addImage(imgData, "JPEG", x, y, w, h);
+      }
+
+      const safeName = fileNameInput.replace(/[^a-zA-Z0-9-_]/g, "_") + ".pdf";
+      pdf.save(safeName);
+
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `✅ <strong>${input.files.length} pages</strong> ka PDF (<strong>${safeName}</strong>) download ho gaya hai!`;
+    }
+
+    // ===== DOCUMENT CHECKLISTS =====
+    const checklists = {
+      otr: {
+        title: "Rajasthan SSO ID & OTR Documents",
+        items: [
+          "Aadhaar Card (Mobile Number Linked)",
+          "Jan Aadhaar Card (Rajasthan Residents)",
+          "10th Class Marksheet (Name & DOB verification)",
+          "Active Mobile Number & Email ID",
+          "Passport Size Photo & Signature"
+        ]
+      },
+      exam: {
+        title: "Sarkari Naukri & Entrance Exam Documents",
+        items: [
+          "SSO ID / Registration Number & Password",
+          "Latest Passport Size Photo (White/Light Background)",
+          "Clear Signature (Black/Blue Pen on White Paper)",
+          "10th, 12th / Graduation Marksheets",
+          "Caste / EWS / Domicile Certificate (If Applicable)"
+        ]
+      },
+      scholarship: {
+        title: "Samaj Kalyan (SJMS) & NSP Scholarship Documents",
+        items: [
+          "Jan Aadhaar Card (Bank Account & Income Updated)",
+          "Latest Income Certificate (Aay Praman Patra)",
+          "Caste & Bonafide (Mool Niwas) Certificate",
+          "Previous Year Passed Marksheet",
+          "Current Year College Fee Receipt & ID Card"
+        ]
+      },
+      college: {
+        title: "College Admission, Semester & Degree Documents",
+        items: [
+          "Enrollment Number / ABC ID (Academic Bank of Credits)",
+          "Previous Semester / Year Marksheets",
+          "10th & 12th Marksheet PDF",
+          "Aadhaar Card, Photo & Signature",
+          "Migration / TC (Admission / Degree ke liye)"
+        ]
+      }
+    };
+
+    let currentChecklistKey = "otr";
+
+    function showChecklist(key, btnEl) {
+      currentChecklistKey = key;
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+
+      const data = checklists[key];
+      document.getElementById("checklistDisplay").innerHTML = `
+        <h4 style="margin-bottom: 12px; font-size: 1.03rem;">${data.title}:</h4>
+        <ul>${data.items.map(item => `<li>• ${item}</li>`).join("")}</ul>
+      `;
+    }
+
+    function copyChecklist() {
+      const data = checklists[currentChecklistKey];
+      const text = `*${data.title}*\n` + data.items.map(i => `✅ ${i}`).join("\n");
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("copyBtn");
+        btn.textContent = "✅ Checklist Copied!";
+        setTimeout(() => { btn.textContent = "📋 Copy Checklist Text"; }, 2000);
+      });
+    }
+
+    showChecklist("otr");
+
+    // ===== INTERACTIVE FEE CALCULATOR =====
+    function calculateFee() {
+      const type = document.getElementById("calcFormType").value;
+      const cat = document.getElementById("calcCategory").value;
+
+      let govtFee = 0;
+      let serviceFee = 100;
+
+      if (type === "otr") {
+        govtFee = cat === "gen" ? 600 : 400;
+        serviceFee = 100;
+      } else if (type === "ssc") {
+        govtFee = cat === "gen" ? 100 : 0;
+        serviceFee = 100;
+      } else if (type === "state") {
+        govtFee = 0; // Free after OTR in Rajasthan
+        serviceFee = 80;
+      } else if (type === "scholarship") {
+        govtFee = 0;
+        serviceFee = 120;
+      } else if (type === "college") {
+        govtFee = 500;
+        serviceFee = 100;
+      }
+
+      const total = govtFee + serviceFee;
+      document.getElementById("feeOutput").innerHTML = `
+        <div class="fee-row"><span>Approx Govt / Portal Fee:</span><strong>₹${govtFee}</strong></div>
+        <div class="fee-row"><span>Online Form Service Charge:</span><strong>₹${serviceFee}</strong></div>
+        <div class="fee-total"><span>Estimated Total:</span><span>₹${total}</span></div>
+      `;
+    }
+    calculateFee();
+
+    // ===== WHATSAPP & EMAIL SUBMISSION =====
+    function getOrderText() {
+      const name = document.getElementById("studentName").value.trim();
+      const category = document.getElementById("serviceCategory").value;
+      const details = document.getElementById("formDetails").value.trim();
+      const note = document.getElementById("extraNote").value.trim();
+
+      let msg = `Hello Nikhil Digital Seva! Mujhe online form bharwana hai:\n\n`;
+      msg += `Name: ${name}\n`;
+      msg += `Category: ${category}\n`;
+      msg += `Form Name: ${details}\n`;
+      if (note) msg += `Note: ${note}\n`;
+      msg += `\nMain apne documents attach/send kar raha/rahi hoon.`;
+      return { name, details, msg };
+    }
+
+    function sendToWhatsApp(e) {
+      e.preventDefault();
+      const { msg } = getOrderText();
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function sendToEmail() {
+      const form = document.getElementById("orderForm");
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const { name, details, msg } = getOrderText();
+      const subject = `Online Form Request: ${details} - ${name}`;
+      window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+    }
+  </script>
+</body>
+</html>
